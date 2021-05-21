@@ -1,3 +1,5 @@
+%% SISO
+
 clc;
 clear;
 close all;
@@ -37,8 +39,7 @@ title('Gradient descent')
 figure
 subplot(211)
 hold on
-plot(t,aHat),plot(t,bHat),legend('a','b')
-title('Lyapunov Parallel')
+plot(t,aHat),plot(t,bHat),legend('a','b'),title('Lyapunov Parallel')
 
 % lyapunov method Mix
 [xHat,aHat,bHat] = lyapunovMix(x,u,t);
@@ -46,8 +47,7 @@ title('Lyapunov Parallel')
 % plot
 subplot(212)
 hold on
-plot(t,aHat),plot(t,bHat),legend('a','b')
-title('Lyapunov Mix')
+plot(t,aHat),plot(t,bHat),legend('a','b'),title('Lyapunov Mix')
 
 % NOISE
 amplitude = 1;
@@ -61,8 +61,7 @@ x = @(t) x(t) + noise(t);
 figure
 subplot(211)
 hold on
-plot(t,aHat),plot(t,bHat),legend('a','b')
-title('Lyapunov Parallel with noise')
+plot(t,aHat),plot(t,bHat),legend('a','b'),title('Lyapunov Parallel with noise')
 
 % lyapunov method Mix
 [xHat,aHat,bHat] = lyapunovMix(x,u,t);
@@ -70,9 +69,38 @@ title('Lyapunov Parallel with noise')
 % plot
 subplot(212)
 hold on
-plot(t,aHat),plot(t,bHat),legend('a','b')
-title('Lyapunov Mix with noise')
-
-% MIMO
+plot(t,aHat),plot(t,bHat),legend('a','b'),title('Lyapunov Mix with noise')
 
 
+%% MIMO
+
+clc;
+clear;
+close all;
+
+% the parameters I want to estimate
+a = [-0.25 3; -5 -1];
+b = [1;2];
+
+% input
+u = @(t) 10*sin(2*t) + 5*sin(7.5*t);
+
+% time range
+t = 0:0.01:100;
+
+% learning rate
+gamma = [1 1];
+
+% compare to the previous implementations, now we compute the output within
+% one ode function
+[xHat,aHat,bHat] = lyapunovParallelMIMO(u,t,a,b,gamma);
+
+% plot
+figure
+subplot(211)
+hold on
+plot(t,aHat),legend('a11','a12','a21','a22'),title('Lyapunov Parallel')
+
+subplot(212)
+hold on
+plot(t,bHat),legend('b1','b2'),title('Lyapunov Parallel')
