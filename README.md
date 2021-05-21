@@ -1,6 +1,6 @@
 # Parameters estimation
 
-The goal of the projects listed in this repository is to practice different methods for parameter estimation including **offline** and **online** or real-time techniques such as least squares for the first and gradient descent, lyapunov for the second
+The goal of these projects listed in this repository is to practice different methods for parameter estimation including **offline** and **online** or real-time techniques such as least squares for the first and gradient descent, lyapunov for the second.
 
 ## Directory structure
 
