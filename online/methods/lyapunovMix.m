@@ -8,7 +8,7 @@ bHat = y(:,3);
 end
 
 function dy = diffSystem(x,u,t,y,gamma,thetaM)
-xHat=y(1); theta(1) = y(2); theta(2) = y(3);
+xHat = y(1); theta(1) = y(2); theta(2) = y(3);
 
 error = x(t) - xHat;
 dxHat = -theta(1)*x(t) + theta(2)*u(t) + thetaM*error;

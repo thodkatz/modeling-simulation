@@ -9,8 +9,8 @@ a = 2; b = 1;
 u = @(t) 5*sin(3*t);
 
 % output
-start = 0; step = 0.1; 
-t = start:step:20;
+start = 0; step = 0.01; 
+t = start:step:100;
 dx = @(t,x) -a*x + b*u(t);
 [t, x] = ode45(dx,t,0);
 
@@ -49,9 +49,9 @@ hold on
 plot(t,aHat),plot(t,bHat),legend('a','b')
 title('Lyapunov Mix')
 
-
 % NOISE
-noise = @(t) 0.5*sin(2*pi*20*t);
+amplitude = 1;
+noise = @(t) 0.15*sin(2*pi*20*t);
 x = @(t) x(t) + noise(t);
 
 % lyapunov method Parallel
@@ -72,3 +72,7 @@ subplot(212)
 hold on
 plot(t,aHat),plot(t,bHat),legend('a','b')
 title('Lyapunov Mix with noise')
+
+% MIMO
+
+
