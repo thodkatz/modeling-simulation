@@ -1,11 +1,6 @@
-function [aHat,bHat] = gradientDescent(x,u,t)
-% the root of the stable filter
-eig = -1; 
-
-% learning rate
-gamma = 1;
-
+function [phi,aHat,bHat] = gradientDescent(x,u,t,eig,gamma)
 [t, y] = ode45(@(t,y)diffSystem(t,y,u,x,gamma,eig),t,[0 0 0 0]);
+phi = [y(:,1) y(:,2)];
 aHat = -eig -y(:,3);
 bHat = y(:,4);
 end
