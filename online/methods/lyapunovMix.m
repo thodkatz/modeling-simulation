@@ -1,6 +1,4 @@
-function [xHat,aHat,bHat] = lyapunovMix(x,u,t)
-gamma = [1 1];
-thetaM = 1;
+function [xHat,aHat,bHat] = lyapunovMix(x,u,t,gamma,thetaM)
 [t,y] = ode45(@(t,y)diffSystem(x,u,t,y,gamma,thetaM), t, [0 0 0]);
 xHat = y(:,1);
 aHat = y(:,2);

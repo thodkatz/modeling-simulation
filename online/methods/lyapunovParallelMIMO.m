@@ -1,5 +1,6 @@
-function [xHat,aHat,bHat] = lyapunovParallelMIMO(u,t,a,b,gamma)
+function [x,xHat,aHat,bHat] = lyapunovParallelMIMO(u,t,a,b,gamma)
 [t,y] = ode45(@(t,y)diffSystem(t,y,u,a,b,gamma), t, zeros(10,1));
+x    = [y(:,1) y(:,4)];
 xHat = [y(:,3) y(:,4)];
 aHat = [y(:,5) y(:,6) y(:,7) y(:,8)];
 bHat = [y(:,9) y(:,10)];
@@ -11,7 +12,7 @@ xHat = [y(3);y(4)];
 aHat = [y(5) y(6);y(7) y(8)];
 bHat = [y(9);y(10)];
 
-dx = a*x + b*u(t); note
+dx = a*x + b*u(t);
 e = [x(1) - xHat(1); x(2) - xHat(2)];
 dxHat = aHat*xHat + bHat*u(t);
 daHat = gamma(1) * (xHat*e');
